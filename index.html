@@ -31,6 +31,12 @@
   </style>
 </head>
 <body>
+  <div id="loading-screen">
+    <div class="spinner"></div>
+    <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+    </div>
+  </div>
   <nav class="navbar">
     <a href="https://blobbyofficial.com" class="navbar-icon" title="Visit blobbyofficial.com" target="_blank" rel="noopener">
       <img src="/favicon.ico" alt="blobbyofficial icon" width="32" height="32" style="border-radius:8px;vertical-align:middle;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
@@ -148,7 +154,16 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', fetchAndRenderScripts);
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchAndRenderScripts();
+      // Hide loading screen after content is loaded
+      const loadingScreen = document.getElementById('loading-screen');
+      if (loadingScreen) {
+        setTimeout(() => {
+          loadingScreen.classList.add('hide');
+        }, 600); // smooth fade out
+      }
+    });
   </script>
 </body>
 </html>

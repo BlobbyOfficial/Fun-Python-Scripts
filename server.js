@@ -54,4 +54,8 @@ if (require.main === module) {
     });
 }
 
+// For Vercel serverless deployment
 module.exports = app;
+module.exports.handler = (req, res) => {
+  return app(req, res);
+};
