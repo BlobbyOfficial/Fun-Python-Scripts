@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A beautiful collection of fun, downloadable Python scripts. View, download, and learn from open source code.">
+    <meta name="keywords" content="python, scripts, fun, download, open source, code, cli, utilities, games, learning, blobbyofficial, programming, showcase, portfolio, tools, education, beginner, advanced, projects, showcase, code snippets, interactive, webapp, nodejs, express, beautiful, modern, responsive, animated, polished, creative, coding, software, free, open, MIT, utilities, productivity, entertainment, showcase, blobbyofficial.com">
+    <meta name="author" content="blobbyofficial">
+    <meta property="og:title" content="Fun Python Scripts by blobbyofficial">
+    <meta property="og:description" content="A beautiful, modern webapp to browse, view, and download Python scripts. Built by blobbyofficial.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blobbyofficial.com/">
+    <meta property="og:image" content="/favicon.ico">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Fun Python Scripts by blobbyofficial">
+    <meta name="twitter:description" content="A beautiful, modern webapp to browse, view, and download Python scripts. Built by blobbyofficial.">
+    <meta name="twitter:image" content="/favicon.ico">
+    <title>Fun Python Scripts by blobbyofficial</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+</header>
+<div id="banner-ad" class="banner-ad" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#f7faff 60%,#e3f2fd 100%);color:#007bff;font-size:1.05em;padding:8px 0 6px 0;box-shadow:0 2px 8px rgba(0,123,255,0.04);min-height:36px;">
+    <span style="opacity:0.8;">Ad: <a href="https://blobbyofficial.com" target="_blank" style="color:#007bff;text-decoration:underline;">Check out blobbyofficial.com for more cool projects!</a></span>
+</div>
+<main>
+    <section id="script-of-the-day-section" class="script-of-the-day-section"></section>
+    <section id="joke-section" class="joke-section"></section>
+    <div class="scripts-container" id="scriptsContainer"></div>
+</main>
+<footer class="main-footer">
+    &copy; 2024 <a href="https://blobbyofficial.com" target="_blank" rel="noopener" class="footer-link">blobbyofficial</a>
+</footer>
+<script>
+    function escapeHTML(str) {
+        return str.replace(/[&<>\"]/g, function(m) {
+            return ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[m]);
+        });
+    }
+    async function loadScriptOfTheDay() {
+        const section = document.getElementById('script-of-the-day-section');
+        try {
+            const res = await fetch('/api/script-of-the-day');
+            if (!res.ok) return;
+            const script = await res.json();
+            section.innerHTML = `<div class="script-of-the-day-card" style="animation:fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) both;background:linear-gradient(90deg,#e3f2fd 60%,#fff 100%);border:1.5px solid #90caf9;box-shadow:0 4px 24px rgba(0,123,255,0.08);padding:18px 24px 14px 24px;border-radius:10px;margin:32px auto 24px auto;max-width:600px;text-align:left;">
+                <div style="font-size:1.1em;color:#007bff;font-weight:700;margin-bottom:4px;">Script of the Day</div>
+                <div style="font-size:1.4em;font-weight:700;margin-bottom:2px;">${escapeHTML(script.name)}</div>
+                <div style="color:#444;margin-bottom:6px;">${escapeHTML(script.description)}</div>
+                <div style="font-size:0.98em;color:#007bff;margin-bottom:8px;">By ${escapeHTML(script.author)} | v${escapeHTML(script.version)}</div>
+                <a class="download-btn" href="/scripts/${encodeURIComponent(script.folder)}/${encodeURIComponent(script.filename)}" download>Download</a>
+            </div>`;
+        } catch {}
+    }
+    async function loadJoke() {
+        const section = document.getElementById('joke-section');
+        try {
+            const res = await fetch('/api/random-joke');
+            if (!res.ok) return;
+            const data = await res.json();
+            section.innerHTML = `<div class="joke-card" style="background:#fffbe7;color:#b8860b;border:1.5px solid #ffe082;box-shadow:0 2px 8px rgba(255,193,7,0.07);border-radius:8px;padding:12px 18px;margin:0 auto 18px auto;max-width:500px;text-align:center;font-size:1.08em;animation:fadeIn 0.7s;">💡 ${escapeHTML(data.joke)}</div>`;
+        } catch {}
+    }
+    async function loadScripts() {
+        const container = document.getElementById('scriptsContainer');
+        container.innerHTML = '<div class="loader"></div>';
+        try {
+            const response = await fetch('/api/scripts');
+            const scripts = await response.json();
+            if (!Array.isArray(scripts) || scripts.length === 0) {
+                container.innerHTML = '<p class="empty-msg">No scripts found.</p>';
+                return;
+            }
+            container.innerHTML = scripts.map((script, idx) => `
+                <div class="script-card" tabindex="0" style="animation-delay:${idx*0.07}s">
+                    <h2 class="script-title">${escapeHTML(script.name)}</h2>
+                    <p class="script-description">${escapeHTML(script.description)}</p>
+                    <div class="script-meta">
+                        <span>Author: ${escapeHTML(script.author)}</span> |
+                        <span>Version: ${escapeHTML(script.version)}</span>
+                    </div>
+                    <a class="download-btn" href="/scripts/${encodeURIComponent(script.folder)}/${encodeURIComponent(script.filename)}" download>Download</a>
+                    <button class="source-btn" id="btn-${idx}" aria-expanded="false">View Source</button>
+                    <div id="src-${idx}" class="source-code" style="display:none;"><pre>Loading...</pre></div>
+                </div>
+            `).join('');
+            scripts.forEach((script, idx) => {
+                const btn = document.getElementById('btn-' + idx);
+                if (btn) {
+                    btn.addEventListener('click', async function handler() {
+                        const srcDiv = document.getElementById('src-' + idx);
+                        if (srcDiv && srcDiv.textContent === 'Loading...') {
+                            const resp = await fetch(`/scripts/${encodeURIComponent(script.folder)}/${encodeURIComponent(script.filename)}`);
+                            if (resp.ok) {
+                                const code = await resp.text();
+                                srcDiv.innerHTML = `<pre>${escapeHTML(code)}</pre>`;
+                            } else {
+                                srcDiv.innerHTML = `<pre>Unable to load source code.</pre>`;
+                            }
+                        }
+                        if (srcDiv.style.display === 'none') {
+                            srcDiv.style.display = 'block';
+                            btn.textContent = 'Hide Source';
+                            btn.setAttribute('aria-expanded', 'true');
+                        } else {
+                            srcDiv.style.display = 'none';
+                            btn.textContent = 'View Source';
+                            btn.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                }
+            });
+        } catch (error) {
+            container.innerHTML = '<p class="error-msg">Error loading scripts.</p>';
+        }
+    }
+    // Cookie consent for ad scripts (if you use a real ad network)
+    function showCookieConsent() {
+        if (!document.cookie.includes('cookieConsent=true')) {
+            const consent = document.createElement('div');
+            consent.className = 'cookie-consent';
+            consent.innerHTML = 'This site uses cookies for ad personalization. <button>Accept</button>';
+            document.body.appendChild(consent);
+            consent.querySelector('button').onclick = function() {
+                document.cookie = 'cookieConsent=true; path=/; max-age=31536000';
+                consent.remove();
+            };
+        }
+    }
+    // If you use a real ad network, call showCookieConsent();
+    document.addEventListener('DOMContentLoaded', () => {
+        loadScriptOfTheDay();
+        loadJoke();
+        loadScripts();
+        // showCookieConsent(); // Uncomment if you add real ad scripts
+    });
+</script>
+</body>
+</html>

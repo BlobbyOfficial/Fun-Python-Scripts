@@ -1,0 +1,8 @@
+{
+  "name": "Rock Paper Scissors",
+  "description": "Play rock-paper-scissors against the computer.",
+  "author": "GitHub Copilot",
+  "version": "1.0",
+  "enabled": true,
+  "filename": "rps.py"
+}

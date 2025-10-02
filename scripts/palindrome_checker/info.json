@@ -1,0 +1,8 @@
+{
+  "name": "Palindrome Checker",
+  "description": "Checks if a string is a palindrome.",
+  "author": "GitHub Copilot",
+  "version": "1.0",
+  "enabled": true,
+  "filename": "palindrome.py"
+}

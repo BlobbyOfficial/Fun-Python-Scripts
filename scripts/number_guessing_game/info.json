@@ -1,0 +1,8 @@
+{
+  "name": "Number Guessing Game",
+  "description": "A simple game where you try to guess the random number between 1 and 100.",
+  "author": "GitHub Copilot",
+  "version": "1.0",
+  "enabled": true,
+  "filename": "guess.py"
+}

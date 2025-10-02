@@ -1,0 +1,8 @@
+{
+  "name": "Countdown Timer",
+  "description": "A simple countdown timer.",
+  "author": "GitHub Copilot",
+  "version": "1.0",
+  "enabled": true,
+  "filename": "countdown.py"
+}

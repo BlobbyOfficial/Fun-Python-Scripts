@@ -1,0 +1,12 @@
+{
+  "name": "fun-python-scripts",
+  "version": "1.0.0",
+  "description": "A collection of fun Python scripts with a Node.js/Express web interface.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

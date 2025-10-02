@@ -1,0 +1,8 @@
+{
+  "name": "Weather CLI",
+  "description": "Fetches weather for a city using OpenWeatherMap API.",
+  "author": "GitHub Copilot",
+  "version": "1.0",
+  "enabled": true,
+  "filename": "weather.py"
+}

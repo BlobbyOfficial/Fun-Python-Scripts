@@ -1,0 +1,8 @@
+{
+  "name": "Matrix Rain",
+  "description": "Simulates green falling numbers like in The Matrix.",
+  "author": "GitHub Copilot",
+  "version": "1.0",
+  "enabled": true,
+  "filename": "matrix.py"
+}

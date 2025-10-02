@@ -1,0 +1,162 @@
+body {
+  background: #f7f9fa;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+.scripts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#scripts {
+  max-width: 700px;
+  margin: 0 auto 40px auto;
+  padding: 0 16px;
+}
+
+.script-card {
+    /* Theme variables */
+    :root {
+      --color-bg: #f7f9fa;
+      --color-text: #222;
+      --color-accent: #007bff;
+      --color-card: #fff;
+      --color-card-border: #e3f2fd;
+      --color-title: #007bff;
+      --color-btn-bg: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+      --color-btn-hover: linear-gradient(90deg, #0056b3 0%, #00aaff 100%);
+      --color-pre-bg: #f3f3f3;
+      --color-pre-border: #e0e0e0;
+    }
+
+    [data-theme="dark"] {
+      --color-bg: #181c24;
+      --color-text: #e3eafc;
+      --color-accent: #90caf9;
+      --color-card: #232b3a;
+      --color-card-border: #26334d;
+      --color-title: #90caf9;
+      --color-btn-bg: linear-gradient(90deg, #232b3a 0%, #4fc3f7 100%);
+      --color-btn-hover: linear-gradient(90deg, #10131a 0%, #90caf9 100%);
+      --color-pre-bg: #181c24;
+      --color-pre-border: #26334d;
+    }
+
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+}
+
+.script-card:hover {
+    transform: translateY(-2px);
+}
+
+.script-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.script-description {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.script-meta {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  font-size: 2.5rem;
+  color: #007BFF;
+  letter-spacing: 1px;
+}
+
+script {
+  margin-bottom: 28px;
+}
+
+details {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 0 20px 16px 20px;
+  transition: box-shadow 0.2s;
+}
+
+details[open] {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+summary {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #007BFF;
+  cursor: pointer;
+  padding: 18px 0 10px 0;
+  outline: none;
+  user-select: none;
+}
+
+.details-content {
+  margin-top: 8px;
+}
+
+a.download-btn, button {
+  display: inline-block;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 7px 16px;
+  background: #007BFF;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+a.download-btn:hover, button:hover {
+  background: #0056b3;
+}
+
+pre {
+  background: #f3f3f3;
+  padding: 14px;
+  border-radius: 6px;
+  overflow-x: auto;
+  max-height: 350px;
+  font-size: 1rem;
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  border: 1px solid #e0e0e0;
+}
+
+@media (max-width: 600px) {
+  #scripts {
+    padding: 0 4px;
+  }
+  details {
+    padding: 0 8px 12px 8px;
+  }
+  summary {
+    font-size: 1.1rem;
+  }
+  pre {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+}

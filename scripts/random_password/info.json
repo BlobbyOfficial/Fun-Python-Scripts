@@ -1,0 +1,8 @@
+{
+  "name": "Random Password Generator",
+  "description": "Generates a random password.",
+  "author": "GitHub Copilot",
+  "version": "1.0",
+  "enabled": true,
+  "filename": "password.py"
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Todo CLI",
+  "description": "A simple command-line todo list.",
+  "author": "GitHub Copilot",
+  "version": "1.0",
+  "enabled": true,
+  "filename": "todo.py"
+}

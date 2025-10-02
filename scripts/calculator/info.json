@@ -1,0 +1,8 @@
+{
+  "name": "Calculator",
+  "description": "A basic calculator for evaluating expressions.",
+  "author": "GitHub Copilot",
+  "version": "1.0",
+  "enabled": true,
+  "filename": "calculator.py"
+}

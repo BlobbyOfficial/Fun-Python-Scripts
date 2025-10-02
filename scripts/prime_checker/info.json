@@ -1,0 +1,8 @@
+{
+  "name": "Prime Checker",
+  "description": "Checks if a number is prime.",
+  "author": "GitHub Copilot",
+  "version": "1.0",
+  "enabled": true,
+  "filename": "prime.py"
+}
